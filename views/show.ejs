@@ -1,0 +1,101 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="container my-5">
+  <div class="card shadow-lg p-4 border-0 rounded-4">
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <img src="<%= data.img.url || '/images/placeholder.jpg' %>" class="img-fluid rounded-4 listing-img" alt="<%= data.title %>">
+        <p class="offset-9">Owned By <b><i><%= data.owner.username %></i></b></p>
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3"><%= data.title %></h2>
+        <p class="text-muted fs-5"><%= data.description %></p>
+        <p class="fs-5"><strong>Price:</strong><%= data.price.toLocaleString("en-IN", {style: "currency",currency: "INR",minimumFractionDigits: 0}) %> /night</p>
+        <p class="fs-6"><strong>Location:</strong> <%= data.location %></p>
+        <p class="fs-6"><strong>Country:</strong> <%= data.country %></p>
+        <% if(curruser && curruser._id.equals(data.owner._id)){ %>
+        <div class="mt-4 d-flex gap-3">
+          <form method="get" action="/listings/<%= data._id %>/edit">
+            <button class="btn btn-warning px-4">Edit</button>
+          </form>
+          <form method="post" action="/listings/<%= data._id %>?_method=DELETE">
+            <button class="btn btn-danger px-4">Delete</button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Comment Section -->
+<% if(curruser){ %>
+<div class="mt-5">
+  <div class="card border-0 shadow-sm rounded-4 p-4">
+    <h4 class="mb-4">Leave a Review</h4>
+    <form action="/listings/<%= data._id %>/review" method="POST">
+      <div class="mb-3">
+        <label class="form-label d-block">Rating</label>
+        <div class="star-rating d-flex flex-row-reverse justify-content-start gap-1">
+          <% for (let i = 5; i >= 1; i--) { %>
+            <input type="radio" id="star<%= i %>" name="review[rating]" value="<%= i %>" required />
+            <label for="star<%= i %>" title="<%= i %> stars">&#9733;</label>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea id="comment" name="review[comment]" class="form-control" rows="4" placeholder="Write your review here..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary px-4">Submit Review</button>
+    </form>
+  </div>
+<% } %>
+  <!-- All Reviews Section -->
+<% if (data.reviews && data.reviews.length > 0) { %>
+  <div class="mt-5">
+    <h4 class="mb-4">Customer Reviews</h4>
+    <div class="row g-4">
+      <% for (const review of data.reviews) { %>
+        <div class="col-md-6">
+          <div class="card border-1 shadow-sm rounded-4 p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0"><%= review.author.username  %></h5>
+              <small class="text-muted">
+                <%= new Date(review.date).toLocaleDateString("en-IN", {
+                  year: "numeric", month: "short", day: "numeric"
+                }) %>
+              </small>
+            </div>
+            <div class="mb-2">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <% if (i <= review.rating) { %>
+                  <span class="text-warning">&#9733;</span>
+                <% } else { %>
+                  <span class="text-muted">&#9733;</span>
+                <% } %>
+              <% } %>
+            </div>
+            <p class="mb-0"><%= review.comment %></p>
+            <form method="post" action="/listings/<%= data._id %>/review/<%= review._id %>?_method=DELETE" class="mt-2">
+            <button class="btn btn-danger col-md-3">Delete Review</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+<% } %>
+<br>
+
+<h3>Where you’ll be</h3>
+<h5><%= data.location %></h5>
+<div id="map" style="height: 400px;"></div>
+</div>
+</div>
+</div>
+<script>
+  let coordinates = <%- JSON.stringify(data.coordinates.coordinates) %>;
+  let location1 = <%- JSON.stringify(data.location) %>;
+</script>
+<script src="/js/maps.js"></script>

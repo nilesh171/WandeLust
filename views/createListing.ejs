@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">Create New Listing</h2>
+        <form method="POST" action="/listings/new" novalidate class="needs-validation" enctype="multipart/form-data" onchange="validateSize(this)">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="listing[title]" class="form-control" placeholder="Add Title..." required>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please provide valid title</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="listing[description]" class="form-control" placeholder="Add Description..." rows="4" required></textarea>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please provide valid description</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input type="file" name="listing[img]" class="form-control" accept="image/*" required>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please provide valid URL</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Price (₹)</label>
+            <input type="number" name="listing[price]" class="form-control" placeholder="Enter Price..." required>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please enter valid price</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="listing[location]" class="form-control" placeholder="Enter Location" required>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please provide valid location</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Country</label>
+            <input type="text" name="listing[country]" class="form-control" placeholder="Enter Country" required>
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please provide valid country</div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg rounded-3">Submit Listing</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function validateSize(input) {
+    const file = input.files[0];
+    if (file && file.size > 1024 * 1024) {
+      alert("File is too large. Max 1 MB allowed.");
+      input.value = ""; // clear the input
+    }
+  }
+</script>

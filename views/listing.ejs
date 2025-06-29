@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') -%>
+<h1 class="text-center my-4">All Listings</h1>
+
+<div class="container">
+  <div class="row">
+    <% if (data.length === 0) { %>
+      <p class="text-center">No listings available.</p>
+    <% } else { %>
+      <% for (let list of data) { %>
+        <div class="col-md-4 mb-4">
+          <a href="/listings/<%= list._id %>" class="card-link">
+            <div class="card custom-card h-100">
+              <img src="<%= list.img.url  %>" class="card-img-top" alt="<%= list.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= list.title %></h5>
+                <p class="card-text text-muted"><%= list.description %></p>
+                <p class="card-text fw-bold"><%= list.price.toLocaleString("en-IN", {style: "currency",currency: "INR",minimumFractionDigits: 0})  %> /night</p>
+                <p class="card-text small">Location: <%= list.location %>, <%= list.country %></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } %>
+    <% } %>
+  </div>
+</div>

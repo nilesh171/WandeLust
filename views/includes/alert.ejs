@@ -1,0 +1,24 @@
+<% if (successmsg && successmsg.length) { %>
+  <div class="container mt-4">
+    <div id="alertBox" class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+      <%= successmsg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
+<% if (failuremsg && failuremsg.length) { %>
+  <div class="container mt-4">
+    <div id="alertBox" class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+      <%= failuremsg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
+<% if (errormsg && errormsg.length) { %>
+  <div class="container mt-4">
+    <div id="alertBox" class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+      <%= errormsg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
