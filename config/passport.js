@@ -5,7 +5,8 @@ module.exports = function (passport) {
   passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'https://wandelust-aj3z.onrender.com/auth/google/callback'
+      callbackURL: "https://wandelust-aj3z.onrender.com/auth/google/callback", // Use .env value
+      proxy: true // Allows Google to trust X-Forwarded-Proto from Render
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
