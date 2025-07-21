@@ -40,19 +40,12 @@ Welcome to the Airbnb Clone project! This is a comprehensive full-stack web appl
     ```
 
 2. **Install Dependencies**
-    - Frontend:
         ```bash
-        cd frontend
-        npm install
-        ```
-    - Backend:
-        ```bash
-        cd ../backend
         npm install
         ```
 
 3. **Environment Variables**
-    - Copy `.env.example` to `.env` in both `frontend` and `backend` folders.
+    - Copy `.env.example` to `.env`.
     - Fill in required values (database URI, JWT secret, Cloudinary credentials, etc.).
 
 4. **Run Development Servers**
@@ -82,14 +75,6 @@ We welcome contributions from the community! To contribute:
 2. Create a new branch for your feature or bugfix.
 3. Commit your changes with clear messages.
 4. Submit a pull request for review.
-
-Please refer to the `CONTRIBUTING.md` for detailed guidelines.
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
