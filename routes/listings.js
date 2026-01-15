@@ -16,7 +16,7 @@ router.get("/new",validUser,(req,res)=>{
 })
 
 router.post("/new",validUser,validateListing,upload.single('listing[img]') ,warpasync(async (req,res)=>{
-    let location = req.body.listing.location;
+    let location = req.body.listing.location; 
     const val = await fetch(`https://api.maptiler.com/geocoding/${encodeURIComponent(location)}.json?key=DcEQCkxfu1PEoOQboINd`);
     const data = await val.json();
     let geoPoint = {

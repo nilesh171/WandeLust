@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines" : {
-  "node": "20.15.1"
+  "engines": {
+    "node": "20.15.1"
   },
   "keywords": [],
   "author": "",
@@ -31,5 +31,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "@appnest/readme": "^1.2.7"
   }
 }
